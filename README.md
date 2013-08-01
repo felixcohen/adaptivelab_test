@@ -1,6 +1,36 @@
 adaptivelab_test
 ================
 
+Instructions:
+
+To run:
+
+use either shotgun (included in the Gemfile) or ruby itself to run from the command line:
+
+'shotgun ./adaptive.rb'
+
+or
+
+'ruby ./adaptive.rb'
+
+
+To run tests
+
+run
+
+'rake spec'
+
+from the root directory.
+
+To access data
+
+You can use ActiveRecord methods on the 'Messages' class if you use
+
+irb -r ./adaptive.rb
+
+Or directly access the database in the db folder (sqlite3)
+
+
 Adaptive Lab’s Technical Test
 
 Background
