@@ -13,4 +13,5 @@ group :development,:test do
   gem 'rspec'
   gem 'factory_girl'
   gem 'fakeweb'
+  gem 'rack-test'
 end

@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe 'Adaptive' do
+describe 'Adaptive', :type => :controller do
+  include Rack::Test::Methods
 
   def app
     Sinatra::Application
@@ -9,7 +10,9 @@ describe 'Adaptive' do
   #tests for app
 
   it 'should display the index' do
-
+    get '/'
+    last_response.should be_ok
+    last_response.body.should include('Adaptive Lab Test')
   end
   
   it 'should fetch updates from the api' do
