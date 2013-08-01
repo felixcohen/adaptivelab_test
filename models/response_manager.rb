@@ -5,7 +5,9 @@ class ResponseManager
 	  	url = 'http://adaptive-test-api.herokuapp.com/tweets.json'
 	  	content = open(url).read
 		results = JSON.parse(content)
-		results = self.parse_responses(results,existing_ids)
+		if !existing_ids.nil?
+			results = self.parse_responses(results,existing_ids)
+		end
 		return results.to_json
 	rescue OpenURI::HTTPError => ex
       return "The API is unavailable".to_json
@@ -13,6 +15,6 @@ class ResponseManager
   end
 
   def parse_responses(results,existing_ids)
-  	return results
+  	return results.reject { |result| existing_ids.include? result["id"].to_s }
   end
 end

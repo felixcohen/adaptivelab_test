@@ -20,12 +20,13 @@ end
 # Posted to from index, do something with the API, store responses and return json 
 
 post '/responses' do
-  existing_ids = params[:existing_ids]
-
   messages = ResponseManager.new
-
-  # messages.fetch_messages(existing_ids)
-  messages.fetch_responses(existing_ids)
+  if params.has_key?(:existing_ids)
+    params.inspect
+    messages.fetch_responses(params[:existing_ids])
+  else
+    messages.fetch_responses(nil)
+  end
 end
 
 
