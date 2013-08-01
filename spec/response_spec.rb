@@ -6,6 +6,10 @@ describe 'Adaptive', :type => :controller do
   def app
     Sinatra::Application
   end
+
+  before(:each) do
+  	FakeWeb.clean_registry
+  end
   
   #tests for app
 
@@ -22,7 +26,10 @@ describe 'Adaptive', :type => :controller do
   end
 
   it 'should handle no response from the api' do
-
+	FakeWeb.register_uri(:get, "http://adaptive-test-api.herokuapp.com/tweets.json", :body => "Nothing found", :status => ["404", "Not Found"])
+  	post '/responses'
+  	last_response.should be_ok
+  	last_response.body.should include('The API is unavailable')
   end
 
   it 'should filter updates from the api' do

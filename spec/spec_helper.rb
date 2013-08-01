@@ -5,6 +5,7 @@ require 'sinatra'
 require 'rspec'
 require 'rack/test'
 require 'factory_girl'
+require 'fakeweb'
 
 
 set :environment, :test
