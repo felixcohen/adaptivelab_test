@@ -8,9 +8,16 @@ class ResponseManager
 		if !existing_ids.nil?
 			results = self.parse_responses(results,existing_ids)
 		end
+		results.each do |result| 
+			if (Message.find_by_id(result["id"]).nil?)
+				m = Message.new(result)
+				m.id = result["id"]
+				m.save
+			end
+		end
 		return results.to_json
 	rescue OpenURI::HTTPError => ex
-      return "The API is unavailable".to_json
+      return "The API is unavailable"
     end 
   end
 

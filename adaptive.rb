@@ -21,8 +21,7 @@ end
 
 post '/responses' do
   messages = ResponseManager.new
-  if params.has_key?(:existing_ids)
-    params.inspect
+  if params[:existing_ids] != ""
     messages.fetch_responses(params[:existing_ids])
   else
     messages.fetch_responses(nil)
