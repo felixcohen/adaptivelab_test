@@ -1,7 +1,10 @@
 %h1
 	Adaptive Lab Test
+#warning
 %table#responses
 	%tr
+		%th
+			ID
 		%th
 			User
 		%th
@@ -10,4 +13,5 @@
 			Message
 		%th
 			Sentiment
+
 %input#fetch_responses{:type=>"submit", :value =>"Fetch more responses"}
