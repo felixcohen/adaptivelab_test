@@ -9,7 +9,7 @@ $(document).ready(function() {
           request.abort();
       }
 
-    // setup some local variables
+    // handle the existing ids
     if ($('td.message_id').length > 0) {
       var existing_ids = $(".message_id").map(function() {
           return this.innerHTML;
@@ -20,25 +20,26 @@ $(document).ready(function() {
       existing_ids = ""
     }
 
+    // passing id's directly in URL because sinatra wasn't playing nice with data method
 
-      request = $.ajax({
-          url: "/responses?existing_ids="+existing_ids,
-          type: "post",
-      });
+    request = $.ajax({
+        url: "/responses?existing_ids="+existing_ids,
+        type: "post",
+    });
 
-      request.done(function (response, textStatus, jqXHR){
-          // log a message to the console
-          console.log(response);
+    request.done(function (response, textStatus, jqXHR){
+        // log a message to the console
+        console.log(response);
 
-          if (response == "The API is unavailable") {
-            $("#warning").html("Sorry, could not contact the API");
-          }
-          else {
-            var data = $.parseJSON(response);
-            $.each(data, function(i, item) {
-              $('#responses tr:last').after('<tr>'+'<td class="message_id">'+item.id+'</td>'+'<td>'+item.user_handle+'</td>'+'<td>'+item.created_at+'</td>'+'<td>'+item.message+'</td>'+'<td>'+item.sentiment+'</td>'+'</tr>');
-            });
-          }
+        if (response == "The API is unavailable") {
+          $("#warning").html("Sorry, could not contact the API");
+        }
+        else {
+          var data = $.parseJSON(response);
+          $.each(data, function(i, item) {
+            $('#responses tr:last').after('<tr>'+'<td class="message_id">'+item.id+'</td>'+'<td>'+item.user_handle+'</td>'+'<td>'+item.created_at+'</td>'+'<td>'+item.message+'</td>'+'<td>'+item.sentiment+'</td>'+'</tr>');
+          });
+        }
       });
 
       // callback handler that will be called on failure
