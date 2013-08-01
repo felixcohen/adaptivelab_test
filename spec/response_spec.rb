@@ -16,7 +16,9 @@ describe 'Adaptive', :type => :controller do
   end
   
   it 'should fetch updates from the api' do
-
+  	post '/responses'
+  	last_response.should be_ok
+  	last_response.body.should include('message')
   end
 
   it 'should handle no response from the api' do
