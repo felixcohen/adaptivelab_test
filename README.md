@@ -5,6 +5,8 @@ Instructions:
 
 To run:
 
+Use 'bundle install' to install required gems, and if you use rbenv or RVM, this should be fine with > Ruby 1.9.3 
+
 use either shotgun (included in the Gemfile) or ruby itself to run from the command line:
 
 'shotgun ./adaptive.rb'
